@@ -1,12 +1,51 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:modern_mushaf/qurantext/constant.dart';
 import 'splash_screen.dart';
+
+
+
+List arabic = [];
+List malayalam = [];
+List quran = [];
+
+
+Future readJson() async{
+  final String response = await rootBundle.loadString("assets/text/hafs_smart_v8.json");
+  final data = json.decode(response);
+  arabic = data['quran'];
+  malayalam = data['malayalam'];
+  return quran = [arabic,malayalam];
+}
+
+
+
+
+
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_)async{
+      await readJson();
+      await getSettings();
+    });
+
+    super.initState();
+  }
 
   // This widget is the root of your application.
   @override
