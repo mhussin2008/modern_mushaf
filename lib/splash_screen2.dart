@@ -1,6 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:modern_mushaf/readers_player.dart';
 import 'qurantext/index_page.dart';
 
 class Splash_Screen2 extends StatelessWidget {
@@ -116,7 +117,10 @@ class Splash_Screen2 extends StatelessWidget {
                       //player.play('https://ia801505.us.archive.org/32/items/a578078078500857578055533_gmail_002L/001L.mp3');
                       //player.play(url);
 
-
+                      await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => readers_player()));
                       print('here im');
                     },
                     style: TextButton.styleFrom(
