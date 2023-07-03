@@ -40,6 +40,7 @@ dependencies:
   shared_preferences:
   share_plus:
   scrollable_positioned_list:
+  easy_search_bar: ^2.5.0
 
 dev_dependencies:
   flutter_test:
