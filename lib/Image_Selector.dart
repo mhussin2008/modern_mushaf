@@ -1,7 +1,37 @@
 import 'package:flutter/material.dart';
+//import 'package:modern_mushaf/generated/assets.dart';
 
-List<String> qary_images=['abdelbasit','hosary','ismail','seddiq'];
-List<String> qary_arab_name=['عبدالباسط','الحصرى','مصطفى اسماعيل','محمد صديق المنشاوى'];
+List<String> qary_images=['abdelbasit',
+'afasy',
+  'agamy',
+  'akhdar',
+  'ayoob',
+  'gebril',
+  'hosary',
+  'hozaify',
+  'maher',
+  'refaey',
+  'shahriar',
+  'shatry',
+  'shreem',
+  'sowayed'
+];
+List<String> qary_arab_name=[
+  'الشيخ عبدالباسط عبدالصمد',
+  'الشيخ مشاري العفاسي',
+  'الشيخ أحمد بن علي العجمي',
+  'الشيخ إبراهيم الاخضر',
+  'الشيخ محمد ايوب',
+  'الشيخ محمد جبريل',
+  'الشيخ محمود خليل الحصري',
+  'الشيخ علي بن عبدالرحمن الحذيفي',
+  'الشيخ ماهر المعيقلي',
+  'الشيخ هاني الرفاعي',
+  'الشيخ شهريار برهيزكار',
+  'الشيخ ابو بكر الشاطري',
+  'الشيخ سعود الشريم',
+  'الشيخ ايمن سويد'
+];
 
 class Image_Selector extends StatefulWidget {
    Image_Selector({super.key});
@@ -21,13 +51,16 @@ class _Image_SelectorState extends State<Image_Selector> {
         qary_images.map((e) {
           return
             Column(
+              //height: 400,
             children :[Image.asset(
-              'assets/pictures/qary_pics/${e}.png'
+              'assets/images/qorra_images/${e}.jpg'
           ,width: 140,
             height: 140,
-          ) ,
-          Text(qary_arab_name[qary_images.indexOf(e)])
-          ]);
+          ) , Text(qary_arab_name[e.indexOf(e)])
+            ,SizedBox(height: 20,)
+            ]
+          //Text(qary_arab_name[qary_images.indexOf(e)])
+          );
 
 
 

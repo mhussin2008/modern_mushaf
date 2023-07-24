@@ -73,20 +73,20 @@ class _readers_playerState extends State<readers_player> {
 
 
             ]),
-            Container(
-              width: 345,
-             height: 160,
-              decoration: ShapeDecoration(
-                image: DecorationImage(
-                  image: Image.asset("assets/images/background1.png").image,
-                  fit: BoxFit.fill,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-              ),
-            ),
-            SizedBox(height: 20,),
+            // Container(
+            //   width: 345,
+            //  height: 160,
+            //   decoration: ShapeDecoration(
+            //     image: DecorationImage(
+            //       image: Image.asset("assets/pictures/img1.png").image,
+            //       fit: BoxFit.fill,
+            //     ),
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(15),
+            //     ),
+            //   ),
+            // ),
+            //SizedBox(height: 20,),
             Container(
 
                 width: double.infinity,

@@ -71,6 +71,7 @@ flutter:
     - assets/fonts/
     - assets/text/
     - assets/images/
+    - assets/images/qorra_images/
 
   #   - images/a_dot_ham.jpeg
 
