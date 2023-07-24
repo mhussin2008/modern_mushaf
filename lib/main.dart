@@ -10,6 +10,7 @@ import 'splash_screen.dart';
 List arabic = [];
 List malayalam = [];
 List quran = [];
+List recitations=[];
 
 
 Future readJson() async{
@@ -17,6 +18,13 @@ Future readJson() async{
   final data = json.decode(response);
   arabic = data['quran'];
   malayalam = data['malayalam'];
+
+
+  final rec_response=await rootBundle.loadString("assets/text/recitations.json");
+  final rec_data = json.decode(rec_response);
+  recitations=rec_data['recitations'];
+  print(recitations);
+
   return quran = [arabic,malayalam];
 }
 

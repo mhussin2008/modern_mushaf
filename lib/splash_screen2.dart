@@ -182,7 +182,7 @@ class Splash_Screen2 extends StatelessWidget {
           ),
           const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Image(
-                width: 300, image: AssetImage('assets/images/abdelbasit.png'))
+                width: 200, image: AssetImage('assets/images/abdelbasit.png'))
           ])
         ],
       ),
