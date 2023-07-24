@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 //import 'package:modern_mushaf/generated/assets.dart';
 
+// https://api-docs.quran.com/quran.com/v4
+
+// https://alquran.cloud/api
+
+
 List<String> qary_images=['abdelbasit',
 'afasy',
   'agamy',
@@ -52,11 +57,21 @@ class _Image_SelectorState extends State<Image_Selector> {
           return
             Column(
               //height: 400,
-            children :[Image.asset(
-              'assets/images/qorra_images/${e}.jpg'
+            children :[
+
+              GestureDetector(
+                onTap: (){
+
+                },
+
+                child: Image.asset(
+                'assets/images/qorra_images/${e}.jpg'
           ,width: 140,
             height: 140,
-          ) , Text(qary_arab_name[e.indexOf(e)])
+          ),
+              ) ,
+
+              Text(qary_arab_name[e.indexOf(e)])
             ,SizedBox(height: 20,)
             ]
           //Text(qary_arab_name[qary_images.indexOf(e)])
