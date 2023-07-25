@@ -2,6 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:modern_mushaf/Image_Selector.dart';
 import 'package:modern_mushaf/main.dart';
 import '../qurantext/constant.dart';
+import 'package:audioplayers/audioplayers.dart';
+
+
+// https://api.alquran.cloud/v1/quran/ar.abdullahbasfar
+//https://api.alquran.cloud/v1/quran/{ar.name}
+
+// https://cdn.islamic.network/quran/audio/128/ar.alafasy/1160.mp3
+
+// https:\/\/cdn.islamic.network\/quran\/audio\/192\/ar.abdullahbasfar\/1.mp3
+
 
 class selected_qary_recite extends StatefulWidget {
   final qaryIndex;
@@ -47,7 +57,13 @@ class _selected_qary_reciteState extends State<selected_qary_recite> {
                           child: SizedBox(
                             width: s_width - 100,
                             child: TextButton(
-                                onPressed: () {},
+                                onPressed: () async {
+                                  final player = AudioPlayer();
+
+                                  // await player.play(UrlSource('https://cdn.islamic.network/quran/audio/128/ar.alafasy/1160.mp3'));
+                                  await player.play(UrlSource('https://cdn.islamic.network/quran/audio/192/ar.abdullahbasfar/1160.mp3'));
+
+                                },
                                 style: ButtonStyle(
                                     shape: MaterialStateProperty.all<
                                             RoundedRectangleBorder>(
