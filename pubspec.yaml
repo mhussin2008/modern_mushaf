@@ -104,6 +104,6 @@ flutter:
     - family: quran
       fonts:
         - asset: assets/fonts/HafsSmart_08.ttf
-    - family: me_quran.ttf
+    - family: me_quran
       fonts:
         - asset: assets/fonts/me_quran.ttf

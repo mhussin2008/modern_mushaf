@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:modern_mushaf/selected_qary_recite.dart';
 //import 'package:modern_mushaf/generated/assets.dart';
 
 // https://api-docs.quran.com/quran.com/v4
@@ -53,25 +54,31 @@ class _Image_SelectorState extends State<Image_Selector> {
 
 
 
-        qary_images.map((e) {
+        qary_images.asMap().entries.map  ((entry) {
+          int SelectedIdx=entry.key  ;
+
+          print(SelectedIdx);
           return
             Column(
               //height: 400,
             children :[
 
               GestureDetector(
-                onTap: (){
-
+                onTap: () async {
+                  await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => selected_qary_recite(SelectedIdx)));
                 },
 
                 child: Image.asset(
-                'assets/images/qorra_images/${e}.jpg'
+                'assets/images/qorra_images/${entry.value}.jpg'
           ,width: 140,
             height: 140,
           ),
               ) ,
 
-              Text(qary_arab_name[e.indexOf(e)])
+              Text(qary_arab_name[SelectedIdx])
             ,SizedBox(height: 20,)
             ]
           //Text(qary_arab_name[qary_images.indexOf(e)])
