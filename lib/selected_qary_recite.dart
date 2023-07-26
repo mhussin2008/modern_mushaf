@@ -68,7 +68,15 @@ class _selected_qary_reciteState extends State<selected_qary_recite> {
                         .entries
                         .map((e) => Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: SizedBox(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.cyan,
+                                    border: Border.all(
+                                      color: Colors.deepOrange,
+                                    ),
+                                    borderRadius: BorderRadius.all(Radius.circular(20))
+                                ),
+                                //color: Colors.deepOrangeAccent,
                                 width: s_width - 100,
                                 child: TextButton(
                                     onPressed: () async {
@@ -87,6 +95,7 @@ class _selected_qary_reciteState extends State<selected_qary_recite> {
                                       print(lastAya);
                                       String urlString1='${qary_sites[widget.qaryIndex]}${startAya}.mp3';
                                       String urlString2='${qary_sites[widget.qaryIndex]}${startAya+1}.mp3';
+                                      print(qary_sites[widget.qaryIndex]);
 
                                       await _player1.setAudioSource(AudioSource.uri(Uri.parse(urlString1)));
                                       await _player2.setAudioSource(AudioSource.uri(Uri.parse(urlString2)));

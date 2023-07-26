@@ -40,7 +40,7 @@ Future getSettings() async {
 
 }
 
-List <Map>arabicName =
+List <Map> arabicName =
 [
   {"surah":"1", "name": "الفاتحة"},
   {"surah":"2", "name": "البقرة"},

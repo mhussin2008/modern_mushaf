@@ -7,35 +7,39 @@ import 'package:modern_mushaf/selected_qary_recite.dart';
 // https://alquran.cloud/api
 
 
-List<String> qary_images=['abdelbasit',
+List<String> qary_images=[
+  'abdelbasit',
 'afasy',
-  'agamy',
-  'akhdar',
+  'basfar','shatry',
+  'agamy','refaey','hosary','hozaify',
+  'akhdar','maher',
   'ayoob',
   'gebril',
-  'hosary',
-  'hozaify',
-  'maher',
-  'refaey',
-  'shahriar',
-  'shatry',
   'shreem',
+
+
+
+  'shahriar',
+
+
   'sowayed'
 ];
 List<String> qary_arab_name=[
   'الشيخ عبدالباسط عبدالصمد',
   'الشيخ مشاري العفاسي',
-  'الشيخ أحمد بن علي العجمي',
-  'الشيخ إبراهيم الاخضر',
+  'الشيخ عبدالله بصفر','الشيخ ابو بكر الشاطري',
+  'الشيخ أحمد بن علي العجمي','الشيخ هاني الرفاعي', 'الشيخ محمود خليل الحصري',
+  'الشيخ علي بن عبدالرحمن الحذيفي',
+  'الشيخ إبراهيم الاخضر', 'الشيخ ماهر المعيقلي',
   'الشيخ محمد ايوب',
   'الشيخ محمد جبريل',
-  'الشيخ محمود خليل الحصري',
-  'الشيخ علي بن عبدالرحمن الحذيفي',
-  'الشيخ ماهر المعيقلي',
-  'الشيخ هاني الرفاعي',
-  'الشيخ شهريار برهيزكار',
-  'الشيخ ابو بكر الشاطري',
   'الشيخ سعود الشريم',
+
+
+
+  'الشيخ شهريار برهيزكار',
+
+
   'الشيخ ايمن سويد'
 ];
 
@@ -50,17 +54,19 @@ class _Image_SelectorState extends State<Image_Selector> {
   @override
   Widget build(BuildContext context) {
     return  SingleChildScrollView(
-      child: Column(children:
+      child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children:
 
 
 
         qary_images.asMap().entries.map  ((entry) {
           int SelectedIdx=entry.key  ;
 
-          print(SelectedIdx);
+          print(qary_images[SelectedIdx]);
           return
             Column(
-              //height: 400,
+
             children :[
 
               GestureDetector(
