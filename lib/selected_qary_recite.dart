@@ -63,15 +63,17 @@ class _selected_qary_reciteState extends State<selected_qary_recite> {
                             width: s_width - 100,
                             child: TextButton(
                                 onPressed: () async {
+                                  print(e.key);
+
                                   //final player = AudioPlayer();
 
                                   // await player.play(UrlSource('https://cdn.islamic.network/quran/audio/128/ar.alafasy/1160.mp3'));
                                   //await player.play(UrlSource('https://cdn.islamic.network/quran/audio/192/ar.abdullahbasfar/1160.mp3'));
                                   //await player.play(UrlSource(qary_sites[widget.qaryIndex]));
-                                  await _player.setAudioSource(AudioSource.uri(Uri.parse(
-                                      qary_sites[widget.qaryIndex]
-                                  )));
-                                  _player.play();
+                                  // await _player.setAudioSource(AudioSource.uri(Uri.parse(
+                                  //     qary_sites[widget.qaryIndex]
+                                  // )));
+                                  // _player.play();
 
                                 },
                                 style: ButtonStyle(
