@@ -20,10 +20,10 @@ Future readJson() async{
   malayalam = data['malayalam'];
 
 
-  final rec_response=await rootBundle.loadString("assets/text/recitations.json");
-  final rec_data = json.decode(rec_response);
-  recitations=rec_data['recitations'];
-  print(recitations);
+  // final rec_response=await rootBundle.loadString("assets/text/recitations.json");
+  // final rec_data = json.decode(rec_response);
+  // recitations=rec_data['recitations'];
+  // print(recitations);
 
   return quran = [arabic,malayalam];
 }

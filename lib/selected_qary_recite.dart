@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:modern_mushaf/Image_Selector.dart';
 import 'package:modern_mushaf/main.dart';
 import '../qurantext/constant.dart';
-import 'package:audioplayers/audioplayers.dart';
+// import 'package:audioplayers/audioplayers.dart';
+import '../qurantext/recitation_verse.dart';
+import 'package:just_audio/just_audio.dart';
 
 
 // https://api.alquran.cloud/v1/quran/ar.abdullahbasfar
@@ -22,6 +24,9 @@ class selected_qary_recite extends StatefulWidget {
 }
 
 class _selected_qary_reciteState extends State<selected_qary_recite> {
+
+  final _player = AudioPlayer();
+
   @override
   Widget build(BuildContext context) {
     print(widget.qaryIndex);
@@ -58,10 +63,15 @@ class _selected_qary_reciteState extends State<selected_qary_recite> {
                             width: s_width - 100,
                             child: TextButton(
                                 onPressed: () async {
-                                  final player = AudioPlayer();
+                                  //final player = AudioPlayer();
 
                                   // await player.play(UrlSource('https://cdn.islamic.network/quran/audio/128/ar.alafasy/1160.mp3'));
-                                  await player.play(UrlSource('https://cdn.islamic.network/quran/audio/192/ar.abdullahbasfar/1160.mp3'));
+                                  //await player.play(UrlSource('https://cdn.islamic.network/quran/audio/192/ar.abdullahbasfar/1160.mp3'));
+                                  //await player.play(UrlSource(qary_sites[widget.qaryIndex]));
+                                  await _player.setAudioSource(AudioSource.uri(Uri.parse(
+                                      qary_sites[widget.qaryIndex]
+                                  )));
+                                  _player.play();
 
                                 },
                                 style: ButtonStyle(
