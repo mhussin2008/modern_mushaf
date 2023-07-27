@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:modern_mushaf/Image_Selector.dart';
 import 'package:modern_mushaf/main.dart';
@@ -14,7 +16,11 @@ import 'package:percent_indicator/percent_indicator.dart';
 // https://cdn.islamic.network/quran/audio/128/ar.alafasy/1160.mp3
 
 // https:\/\/cdn.islamic.network\/quran\/audio\/192\/ar.abdullahbasfar\/1.mp3
-
+String urlString1='';
+String urlString2='';
+final _player1 = AudioPlayer();
+final _player2 = AudioPlayer();
+bool started=false;
 
 class selected_qary_recite extends StatefulWidget {
   final qaryIndex;
@@ -26,9 +32,37 @@ class selected_qary_recite extends StatefulWidget {
 
 class _selected_qary_reciteState extends State<selected_qary_recite> {
 
-  final _player1 = AudioPlayer();
-  final _player2 = AudioPlayer();
+
   final List<AudioPlayer> _players=[];
+@override
+void initState() {
+    // TODO: implement initState
+
+
+
+  var counter = 500;
+  Timer.periodic(const Duration(milliseconds: 100), (timer) {
+    print('im working');
+    if (started==false){return ;}
+    print(timer.tick);
+
+
+    counter--;
+if(_player1.playing==true ){
+  print('playing one${_player1.position}');
+}
+    if(_player1.position>=Duration(seconds: 41))  {
+      print('went to play2');
+      play2();
+
+    }
+    // if (counter == 0) {
+    //   print('Cancel timer');
+    //   timer.cancel();
+    // }
+  });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -67,66 +101,68 @@ class _selected_qary_reciteState extends State<selected_qary_recite> {
                         .asMap()
                         .entries
                         .map((e) => Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.cyan,
-                                    border: Border.all(
-                                      color: Colors.deepOrange,
-                                    ),
-                                    borderRadius: BorderRadius.all(Radius.circular(20))
-                                ),
-                                //color: Colors.deepOrangeAccent,
-                                width: s_width - 100,
-                                child: TextButton(
-                                    onPressed: () async {
-                                      print(e.key);
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.cyan,
+                            border: Border.all(
+                              color: Colors.deepOrange,
+                            ),
+                            borderRadius: BorderRadius.all(Radius.circular(20))
+                        ),
+                        //color: Colors.deepOrangeAccent,
+                        width: s_width - 100,
+                        child: TextButton(
+                            onPressed: () async {
+                              print(e.key);
 
-                                      //final player = AudioPlayer();
+                              //final player = AudioPlayer();
 
-                                      // await player.play(UrlSource('https://cdn.islamic.network/quran/audio/128/ar.alafasy/1160.mp3'));
-                                      //await player.play(UrlSource('https://cdn.islamic.network/quran/audio/192/ar.abdullahbasfar/1160.mp3'));
-                                      //await player.play(UrlSource(qary_sites[widget.qaryIndex]));
-
-
-                                      var startAya=arabic.firstWhere((element) => element['sura_no']==e.key+1)['id'];
-                                      var lastAya=arabic.lastWhere((element) => element['sura_no']==e.key+1)['id'];
-                                      print(startAya);
-                                      print(lastAya);
-                                      String urlString1='${qary_sites[widget.qaryIndex]}${startAya}.mp3';
-                                      String urlString2='${qary_sites[widget.qaryIndex]}${startAya+1}.mp3';
-                                      print(qary_sites[widget.qaryIndex]);
-
-                                      await _player1.setAudioSource(AudioSource.uri(Uri.parse(urlString1)));
-                                      await _player2.setAudioSource(AudioSource.uri(Uri.parse(urlString2)));
-
-                                      await _player1.play();
-                                      await _player2.play();
+                              // await player.play(UrlSource('https://cdn.islamic.network/quran/audio/128/ar.alafasy/1160.mp3'));
+                              //await player.play(UrlSource('https://cdn.islamic.network/quran/audio/192/ar.abdullahbasfar/1160.mp3'));
+                              //await player.play(UrlSource(qary_sites[widget.qaryIndex]));
 
 
+                              var startAya=arabic.firstWhere((element) => element['sura_no']==e.key+1)['id'];
+                              var lastAya=arabic.lastWhere((element) => element['sura_no']==e.key+1)['id'];
+                              print(startAya);
+                              print(lastAya);
+                              urlString1='${qary_sites[widget.qaryIndex]}${startAya}.mp3';
+                              urlString2='${qary_sites[widget.qaryIndex]}${startAya+1}.mp3';
+                              print(qary_sites[widget.qaryIndex]);
+
+                              await _player1.setAudioSource(AudioSource.uri(Uri.parse(urlString1)));
+                              //await _player2.setAudioSource(AudioSource.uri(Uri.parse(urlString2)));
 
 
-
+                              await _player1.play();
+                              started=true;
+                              //await _player2.play();
+                              print('current index=$_player1.currentIndex');
 
 
 
-                                    },
-                                    style: ButtonStyle(
-                                        shape: MaterialStateProperty.all<
-                                                RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(18.0),
-                                                side: BorderSide(
-                                                    color: Colors.red)))),
-                                    child: Text(
-                                      e.value['name'],
-                                      textDirection: TextDirection.rtl,
-                                      style: TextStyle(
-                                          fontFamily: 'quran', fontSize: 30),
-                                    )),
-                              ),
-                            ))
+
+
+
+
+                            },
+                            style: ButtonStyle(
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                        BorderRadius.circular(18.0),
+                                        side: BorderSide(
+                                            color: Colors.red)))),
+                            child: Text(
+                              e.value['name'],
+                              textDirection: TextDirection.rtl,
+                              style: TextStyle(
+                                  fontFamily: 'quran', fontSize: 30),
+                            )),
+                      ),
+                    ))
                         .toList()),
               ),
             ),
@@ -136,10 +172,10 @@ class _selected_qary_reciteState extends State<selected_qary_recite> {
               color: Colors.cyan,
               child:
               LinearPercentIndicator(
-                width: s_width-50,
-                lineHeight: 30,
-                percent: 0.5,
-                progressColor: Colors.orange,
+                  width: s_width-50,
+                  lineHeight: 30,
+                  percent: 0.5,
+                  progressColor: Colors.orange,
                   alignment: MainAxisAlignment.center
               ),
 
@@ -149,4 +185,12 @@ class _selected_qary_reciteState extends State<selected_qary_recite> {
       ),
     );
   }
+  void play2() async {
+  started=false;
+    await _player2.setAudioSource(AudioSource.uri(Uri.parse(urlString2)));
+  await _player2.play();
+
+  }
+
+
 }
