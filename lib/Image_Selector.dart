@@ -53,9 +53,10 @@ class Image_Selector extends StatefulWidget {
 class _Image_SelectorState extends State<Image_Selector> {
   @override
   Widget build(BuildContext context) {
-    return  SingleChildScrollView(
-      child: Column(
-          mainAxisSize: MainAxisSize.max,
+    return
+     SingleChildScrollView(
+              child: Column(
+
           children:
 
 
@@ -63,10 +64,10 @@ class _Image_SelectorState extends State<Image_Selector> {
         qary_images.asMap().entries.map  ((entry) {
           int SelectedIdx=entry.key  ;
 
-          print(qary_images[SelectedIdx]);
+          //print(qary_images[SelectedIdx]);
           return
             Column(
-
+              mainAxisSize: MainAxisSize.min,
             children :[
 
               GestureDetector(
@@ -79,8 +80,8 @@ class _Image_SelectorState extends State<Image_Selector> {
 
                 child: Image.asset(
                 'assets/images/qorra_images/${entry.value}.jpg'
-          ,width: 140,
-            height: 140,
+          ,width: 120,
+            height: 120,
           ),
               ) ,
 
@@ -89,14 +90,10 @@ class _Image_SelectorState extends State<Image_Selector> {
             ]
           //Text(qary_arab_name[qary_images.indexOf(e)])
           );
+       }).toList()
+              )
+     )
 
-
-
-
-        }).toList())
-
-
-        )
     ;
   }
 }

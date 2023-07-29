@@ -91,7 +91,7 @@ class _readers_playerState extends State<readers_player> {
             Container(
 
                 width: double.infinity,
-                height: 700,
+                height: 600,
                 child: Image_Selector())
 
         //     // Container(

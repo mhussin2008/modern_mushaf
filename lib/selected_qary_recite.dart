@@ -1,14 +1,13 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:modern_mushaf/Image_Selector.dart';
 import 'package:modern_mushaf/main.dart';
 import '../qurantext/constant.dart';
-// import 'package:audioplayers/audioplayers.dart';
 import '../qurantext/recitation_verse.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-
 
 // https://api.alquran.cloud/v1/quran/ar.abdullahbasfar
 //https://api.alquran.cloud/v1/quran/{ar.name}
@@ -16,11 +15,16 @@ import 'package:percent_indicator/percent_indicator.dart';
 // https://cdn.islamic.network/quran/audio/128/ar.alafasy/1160.mp3
 
 // https:\/\/cdn.islamic.network\/quran\/audio\/192\/ar.abdullahbasfar\/1.mp3
-String urlString1='';
-String urlString2='';
-final _player1 = AudioPlayer();
-final _player2 = AudioPlayer();
-bool started=false;
+String urlString='';
+
+final mainPlayer = AudioPlayer();
+
+
+int startAya=0;
+int lastAya=0;
+int Counter=0;
+int suraLength=0;
+
 
 class selected_qary_recite extends StatefulWidget {
   final qaryIndex;
@@ -31,38 +35,44 @@ class selected_qary_recite extends StatefulWidget {
 }
 
 class _selected_qary_reciteState extends State<selected_qary_recite> {
+  ValueNotifier<double> Percent=ValueNotifier(0.0);
 
 
-  final List<AudioPlayer> _players=[];
-@override
-void initState() {
+
+  @override
+  void initState() {
+
+      mainPlayer.playerStateStream.listen((state) {
+
+        if (state.playing) {
+        print('playing');
+      } else print('not playing');
+      switch (state.processingState) {
+      case ProcessingState.idle: print('idle');
+      case ProcessingState.loading: print('loading');
+      case ProcessingState.buffering: print('buffering');
+      case ProcessingState.ready: print('ready');
+      case ProcessingState.completed: {
+        print('completed');
+
+
+        if(Counter==suraLength){
+          //Percent.value=(Counter)/(lastAya-startAya+1);
+          Counter=0;
+          startAya=0;
+          lastAya=0;
+          suraLength=0;
+          Percent.value=0.0;
+          mainPlayer.stop();
+        } else {
+        urlString='${qary_sites[widget.qaryIndex]}${startAya+Counter}.mp3';
+        Counter++;
+        Percent.value=(Counter)/(suraLength);
+        playNext();
+      }}}
+    });
     // TODO: implement initState
-
-
-
-  var counter = 500;
-  Timer.periodic(const Duration(milliseconds: 100), (timer) {
-    print('im working');
-    if (started==false){return ;}
-    print(timer.tick);
-
-
-    counter--;
-if(_player1.playing==true ){
-  print('playing one${_player1.position}');
-}
-    if(_player1.position>=Duration(seconds: 41))  {
-      print('went to play2');
-      play2();
-
-    }
-    // if (counter == 0) {
-    //   print('Cancel timer');
-    //   timer.cancel();
-    // }
-  });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +85,6 @@ if(_player1.playing==true ){
           Text(qary_arab_name[widget.qaryIndex]),
           SizedBox(
             width: 10,
-
           ),
           Image.asset(
             'assets/images/qorra_images/${qary_images[widget.qaryIndex]}.jpg',
@@ -116,36 +125,22 @@ if(_player1.playing==true ){
                             onPressed: () async {
                               print(e.key);
 
-                              //final player = AudioPlayer();
-
-                              // await player.play(UrlSource('https://cdn.islamic.network/quran/audio/128/ar.alafasy/1160.mp3'));
-                              //await player.play(UrlSource('https://cdn.islamic.network/quran/audio/192/ar.abdullahbasfar/1160.mp3'));
-                              //await player.play(UrlSource(qary_sites[widget.qaryIndex]));
-
-
-                              var startAya=arabic.firstWhere((element) => element['sura_no']==e.key+1)['id'];
-                              var lastAya=arabic.lastWhere((element) => element['sura_no']==e.key+1)['id'];
+                              startAya=arabic.firstWhere((element) => element['sura_no']==e.key+1)['id'];
+                              lastAya=arabic.lastWhere((element) => element['sura_no']==e.key+1)['id'];
+                              suraLength=lastAya-startAya+1;
                               print(startAya);
                               print(lastAya);
-                              urlString1='${qary_sites[widget.qaryIndex]}${startAya}.mp3';
-                              urlString2='${qary_sites[widget.qaryIndex]}${startAya+1}.mp3';
+                              print(suraLength);
+                              //Counter=1;
+                              urlString='${qary_sites[widget.qaryIndex]}${startAya}.mp3';
+
                               print(qary_sites[widget.qaryIndex]);
 
-                              await _player1.setAudioSource(AudioSource.uri(Uri.parse(urlString1)));
-                              //await _player2.setAudioSource(AudioSource.uri(Uri.parse(urlString2)));
-
-
-                              await _player1.play();
-                              started=true;
-                              //await _player2.play();
-                              print('current index=$_player1.currentIndex');
-
-
-
-
-
-
-
+                              await mainPlayer.setAudioSource(AudioSource.uri(Uri.parse(urlString)));
+                              Counter=1;
+                              Percent.value=Counter/(suraLength);
+                              await mainPlayer.play();
+                              print('current index=$mainPlayer.currentIndex');
                             },
                             style: ButtonStyle(
                                 shape: MaterialStateProperty.all<
@@ -171,12 +166,20 @@ if(_player1.playing==true ){
               height: 150,
               color: Colors.cyan,
               child:
-              LinearPercentIndicator(
-                  width: s_width-50,
-                  lineHeight: 30,
-                  percent: 0.5,
-                  progressColor: Colors.orange,
-                  alignment: MainAxisAlignment.center
+              ValueListenableBuilder(
+                valueListenable: Percent,
+                builder: (BuildContext context, value, Widget? child) {
+
+                  return  LinearPercentIndicator(
+                      width: s_width-50,
+                      lineHeight: 30,
+                      percent: (value >1 || value<0 || value.isNaN )?0.0:value ,
+                      progressColor: Colors.orange,
+                      alignment: MainAxisAlignment.center
+                  );
+
+                },
+
               ),
 
             )
@@ -185,10 +188,11 @@ if(_player1.playing==true ){
       ),
     );
   }
-  void play2() async {
-  started=false;
-    await _player2.setAudioSource(AudioSource.uri(Uri.parse(urlString2)));
-  await _player2.play();
+  void playNext() async {
+
+    await mainPlayer.setAudioSource(AudioSource.uri(Uri.parse(urlString)));
+
+    await mainPlayer.play();
 
   }
 
