@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:modern_mushaf/Image_Selector.dart';
 import 'package:modern_mushaf/main.dart';
+//import 'package:modern_mushaf/qurantext/surah_builder.dart';
+import 'package:modern_mushaf/surah_builder_recite.dart';
 import '../qurantext/constant.dart';
 import '../qurantext/recitation_verse.dart';
 import 'package:just_audio/just_audio.dart';
@@ -39,22 +41,21 @@ class selected_qary_recite2 extends StatefulWidget {
 class _selected_qary_recite2State extends State<selected_qary_recite2> {
 
 
-  late AudioPlayerManager manager;
+
 
 
 
   @override
   void initState() {
     super.initState();
-    manager = AudioPlayerManager();
-    manager.init();
+
 
     // TODO: implement initState
   }
 
   @override
   void dispose() {
-    manager.dispose();
+
     super.dispose();
   }
 
@@ -79,81 +80,79 @@ class _selected_qary_recite2State extends State<selected_qary_recite2> {
       ),
       body: SafeArea(
 
-        child: Column(
-          children: [
-            Container(
-              width: s_width,
-              height: s_height-250,
-              color: Colors.greenAccent,
-              child: SingleChildScrollView(
-                child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: arabicName
-                        .asMap()
-                        .entries
-                        .map((e) => Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.cyan,
-                            border: Border.all(
-                              color: Colors.deepOrange,
-                            ),
-                            borderRadius: BorderRadius.all(Radius.circular(20))
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: arabicName
+                    .asMap()
+                    .entries
+                    .map((e) => Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.cyan,
+                        border: Border.all(
+                          color: Colors.deepOrange,
                         ),
-                        //color: Colors.deepOrangeAccent,
-                        width: s_width - 100,
-                        child: TextButton(
-                            onPressed: () async {
-                              print(e.key);
+                        borderRadius: BorderRadius.all(Radius.circular(20))
+                    ),
+                    //color: Colors.deepOrangeAccent,
+                    width: s_width - 100,
+                    child: TextButton(
+                        onPressed: () async {
+                          print(e.key);
 
-                              startAya=arabic.firstWhere((element) => element['sura_no']==e.key+1)['id'];
-                              lastAya=arabic.lastWhere((element) => element['sura_no']==e.key+1)['id'];
-                              suraLength=lastAya-startAya+1;
-                              print(startAya);
-                              print(lastAya);
-                              print(suraLength);
-                              //Counter=1;
-                              urlString='${qary_sites[widget.qaryIndex]}${startAya}.mp3';
+                          startAya=arabic.firstWhere((element) => element['sura_no']==e.key+1)['id'];
+                          lastAya=arabic.lastWhere((element) => element['sura_no']==e.key+1)['id'];
+                          suraLength=lastAya-startAya+1;
+                          print(startAya);
+                          print(lastAya);
+                          print(suraLength);
+                          //Counter=1;
+                          urlString='${qary_sites[widget.qaryIndex]}${startAya}.mp3';
 
-                              print(qary_sites[widget.qaryIndex]);
+                          print(qary_sites[widget.qaryIndex]);
 
-                              //await mainPlayer.setAudioSource(AudioSource.uri(Uri.parse(urlString)));
-                              Counter=1;
-                             // Percent.value=Counter/(suraLength);
-                              //await mainPlayer.play();
-                             // print('current index=$mainPlayer.currentIndex');
-                            },
-                            style: ButtonStyle(
-                                shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                        BorderRadius.circular(18.0),
-                                        side: BorderSide(
-                                            color: Colors.red)))),
-                            child: Text(
-                              e.value['name'],
-                              textDirection: TextDirection.rtl,
-                              style: TextStyle(
-                                  fontFamily: 'quran', fontSize: 30),
-                            )),
-                      ),
-                    ))
-                        .toList()),
-              ),
-            ),
-            Container(
-              width: s_width,
-              height: 150,
-              color: Colors.cyan,
-              child:
-                    FullExample(audioPlayerManager: manager)
+                          //await mainPlayer.setAudioSource(AudioSource.uri(Uri.parse(urlString)));
+                          Counter=1;
 
-            )
-          ],
+                          //
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SurahBuilderRecite(
+                                    arabic: quran[0],
+                                    surah: e.key,
+                                    surahName: arabicName[e.key]['name'],
+                                    ayah: 0,
+
+                                  )));
+
+                         // Percent.value=Counter/(suraLength);
+                          //await mainPlayer.play();
+                         // print('current index=$mainPlayer.currentIndex');
+                        },
+                        style: ButtonStyle(
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius:
+                                    BorderRadius.circular(18.0),
+                                    side: BorderSide(
+                                        color: Colors.red)))),
+                        child: Text(
+                          e.value['name'],
+                          textDirection: TextDirection.rtl,
+                          style: TextStyle(
+                              fontFamily: 'quran', fontSize: 30),
+                        )),
+                  ),
+                ))
+                    .toList()),
+          ),
         ),
       ),
     );
