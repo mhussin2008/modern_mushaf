@@ -8,6 +8,8 @@ import '../qurantext/constant.dart';
 import '../qurantext/recitation_verse.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
+import 'audio_player_manager.dart';
 
 // https://api.alquran.cloud/v1/quran/ar.abdullahbasfar
 //https://api.alquran.cloud/v1/quran/{ar.name}
@@ -41,11 +43,14 @@ class _selected_qary_reciteState extends State<selected_qary_recite> {
 
   @override
   void initState() {
+    super.initState();
 
       mainPlayer.playerStateStream.listen((state) {
 
         if (state.playing) {
         print('playing');
+
+
       } else print('not playing');
       switch (state.processingState) {
       case ProcessingState.idle: print('idle');
@@ -172,6 +177,7 @@ class _selected_qary_reciteState extends State<selected_qary_recite> {
 
                 return  Column(
                   children: [
+                    SizedBox(height: 20,),
                     LinearPercentIndicator(
                         width: s_width-50,
                         lineHeight: 30,
@@ -181,9 +187,11 @@ class _selected_qary_reciteState extends State<selected_qary_recite> {
                     ),
                     SizedBox(height: 20,),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        SizedBox(height: 20,),
                         Text('Percent='),
-                        Text(((value*100).roundToDouble()).toString()),
+                        Center(child: Text(((value*100).roundToDouble()).toString())),
                       ],
                     )
 

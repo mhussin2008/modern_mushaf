@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:modern_mushaf/selected_qary_recite.dart';
+//import 'package:modern_mushaf/selected_qary_recite.dart';
+import 'package:modern_mushaf/selected_qary_recite2.dart';
 //import 'package:modern_mushaf/generated/assets.dart';
 
 // https://api-docs.quran.com/quran.com/v4
@@ -75,7 +76,7 @@ class _Image_SelectorState extends State<Image_Selector> {
                   await Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) => selected_qary_recite(SelectedIdx)));
+                          builder: (BuildContext context) => selected_qary_recite2(SelectedIdx)));
                 },
 
                 child: Image.asset(
