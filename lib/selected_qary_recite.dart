@@ -167,18 +167,31 @@ class _selected_qary_reciteState extends State<selected_qary_recite> {
               color: Colors.cyan,
               child:
               ValueListenableBuilder(
-                valueListenable: Percent,
-                builder: (BuildContext context, value, Widget? child) {
+              valueListenable: Percent,
+              builder: (BuildContext context, value, Widget? child) {
 
-                  return  LinearPercentIndicator(
-                      width: s_width-50,
-                      lineHeight: 30,
-                      percent: (value >1 || value<0 || value.isNaN )?0.0:value ,
-                      progressColor: Colors.orange,
-                      alignment: MainAxisAlignment.center
-                  );
+                return  Column(
+                  children: [
+                    LinearPercentIndicator(
+                        width: s_width-50,
+                        lineHeight: 30,
+                        percent: (value >1 || value<0 || value.isNaN )?0.0:value ,
+                        progressColor: Colors.orange,
+                        alignment: MainAxisAlignment.center
+                    ),
+                    SizedBox(height: 20,),
+                    Row(
+                      children: [
+                        Text('Percent='),
+                        Text(((value*100).roundToDouble()).toString()),
+                      ],
+                    )
 
-                },
+
+                  ],
+                );
+
+              },
 
               ),
 
