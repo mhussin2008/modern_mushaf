@@ -12,7 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 final ItemScrollController itemScrollController = ItemScrollController();
 final ItemPositionsListener itemPositionsListener =
     ItemPositionsListener.create();
-final mkey=GlobalKey();
+
 
 
 class SurahBuilderRecite extends StatefulWidget {
@@ -21,7 +21,7 @@ class SurahBuilderRecite extends StatefulWidget {
   final surahName;
   final ayah;
   final reciterIndex;
-  late AudioPlayerManager manager;
+  late AudioPlayerManager manager=AudioPlayerManager();
 
 
   SurahBuilderRecite({
@@ -55,7 +55,7 @@ class _SurahBuilderReciteState extends State<SurahBuilderRecite> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) => jumbToAyah());
     super.initState();
-    widget.manager = AudioPlayerManager();
+    //widget.manager = AudioPlayerManager();
     widget.manager.init();
 
   }
