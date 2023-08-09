@@ -55,67 +55,6 @@ class Splash_Screen2 extends StatelessWidget {
                   top: 269.5 * fem,
                   child: TextButton(
                     onPressed: () async {
-                      //await player.setUrl('https://ia801505.us.archive.org/32/items/a578078078500857578055533_gmail_002L/001L.mp3');
-//////////////////////////////////////
-                      ////final player = AudioPlayer();
-                     ///// final url =
-                      ////    'https://ia801505.us.archive.org/32/items/a578078078500857578055533_gmail_002L/001L.mp3';
-                     ///// UrlSource myuri = UrlSource(url);
-                      //////await player.play(myuri);
- /////////////////////////////////////////////
-
-                      //await player.setUrl('https://ia801505.us.archive.org/32/items/a578078078500857578055533_gmail_002L/001L.mp3');
-                      //player.play('https://ia801505.us.archive.org/32/items/a578078078500857578055533_gmail_002L/001L.mp3');
-                      //player.play(url);
-                      await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) => IndexPage()));
-                      print('here im');
-                    },
-                    style: TextButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                    ),
-                    child: Container(
-                      width: 110 * fem,
-                      height: 51 * fem,
-                      decoration: BoxDecoration(
-                        color: const Color(0xff0093d2),
-                        borderRadius: BorderRadius.circular(10 * fem),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'تصفح المصحف',
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.amiri(
-                            fontSize: 17.5 * ffem,
-                            fontWeight: FontWeight.w400,
-                            height: 1.76 * ffem / fem,
-                            color: Color(0xffffffff),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  // frame1m8d (3:23)
-                  left: 130 * fem,
-                  top: 269.5 * fem,
-                  child: TextButton(
-                    onPressed: () async {
-                      //await player.setUrl('https://ia801505.us.archive.org/32/items/a578078078500857578055533_gmail_002L/001L.mp3');
-//////////////////////////////////////
-                      ////final player = AudioPlayer();
-                      ///// final url =
-                      ////    'https://ia801505.us.archive.org/32/items/a578078078500857578055533_gmail_002L/001L.mp3';
-                      ///// UrlSource myuri = UrlSource(url);
-                      //////await player.play(myuri);
-                      /////////////////////////////////////////////
-
-                      //await player.setUrl('https://ia801505.us.archive.org/32/items/a578078078500857578055533_gmail_002L/001L.mp3');
-                      //player.play('https://ia801505.us.archive.org/32/items/a578078078500857578055533_gmail_002L/001L.mp3');
-                      //player.play(url);
 
                       await Navigator.push(
                           context,
@@ -127,15 +66,15 @@ class Splash_Screen2 extends StatelessWidget {
                       padding: EdgeInsets.zero,
                     ),
                     child: Container(
-                      width: 110 * fem,
-                      height: 51 * fem,
+                      width: 110 ,
+                      height: 51 ,
                       decoration: BoxDecoration(
                         color: const Color(0xff0093d2),
                         borderRadius: BorderRadius.circular(10 * fem),
                       ),
                       child: Center(
                         child: Text(
-                          'استمع إلى القراء',
+                          'ابدأ الآن',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.amiri(
                             fontSize: 17.5 * ffem,
@@ -148,6 +87,9 @@ class Splash_Screen2 extends StatelessWidget {
                     ),
                   ),
                 ),
+
+
+
                 Positioned(
 // nZX (3:28)
                   left: 97 * fem,

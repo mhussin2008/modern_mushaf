@@ -139,7 +139,7 @@ class _SurahBuilderReciteState extends State<SurahBuilderRecite> {
                               : const Color.fromARGB(255, 253, 247, 230),
                           child: PopupMenuButton(
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(2.0),
                               child: verseBuilder(index, previousVerses),
                             ),
                             itemBuilder: (context) => [
