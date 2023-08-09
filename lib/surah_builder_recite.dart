@@ -1,6 +1,9 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:modern_mushaf/qurantext/recitation_verse.dart';
+//import 'package:modern_mushaf/selected_qary_recite.dart';
+import 'Image_Selector.dart';
 import 'audio_player_manager.dart';
 import 'qurantext/constant.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -9,20 +12,26 @@ import 'package:shared_preferences/shared_preferences.dart';
 final ItemScrollController itemScrollController = ItemScrollController();
 final ItemPositionsListener itemPositionsListener =
     ItemPositionsListener.create();
+final mkey=GlobalKey();
+
 
 class SurahBuilderRecite extends StatefulWidget {
   final surah;
   final arabic;
   final surahName;
-  int ayah;
+  final ayah;
+  final reciterIndex;
+  late AudioPlayerManager manager;
+
 
   SurahBuilderRecite({
-    Key? key,
+    Key? mkey,
     this.surah,
     this.arabic,
     this.surahName,
-    required this.ayah,
-  }) : super(key: key);
+    this.ayah,
+    this.reciterIndex,
+  }) : super(key: mkey);
 
   @override
   State<SurahBuilderRecite> createState() => _SurahBuilderReciteState();
@@ -30,7 +39,7 @@ class SurahBuilderRecite extends StatefulWidget {
 
 class _SurahBuilderReciteState extends State<SurahBuilderRecite> {
   bool view = true;
-  late AudioPlayerManager manager;
+
 
 
 
@@ -38,7 +47,7 @@ class _SurahBuilderReciteState extends State<SurahBuilderRecite> {
 
   @override
   void dispose() {
-    manager.dispose();
+    widget.manager.dispose();
     super.dispose();
   }
 
@@ -46,8 +55,8 @@ class _SurahBuilderReciteState extends State<SurahBuilderRecite> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) => jumbToAyah());
     super.initState();
-    manager = AudioPlayerManager();
-    manager.init();
+    widget.manager = AudioPlayerManager();
+    widget.manager.init();
 
   }
 
@@ -172,6 +181,38 @@ class _SurahBuilderReciteState extends State<SurahBuilderRecite> {
                                   ],
                                 ),
                               ),
+                              PopupMenuItem(
+                                onTap: () async {
+                                  // listen to ayah
+                                  var selectedAya= index   ;
+                                  var correctIndex=getCorrectIndex(widget.surah,index);
+                                  var urlString='${qary_sites[widget.reciterIndex]}${correctIndex}.mp3';
+
+                                    await widget.manager.player.setAudioSource(AudioSource.uri(Uri.parse(urlString)));
+
+                                    await widget.manager.player.play();
+
+
+                                  //widget.manager.player.audioSource=
+                                  //mkey.currentWidget.manager.
+                                  //print(mkey);
+                                },
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.share,
+                                      color: Color.fromARGB(255, 56, 115, 59),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      "استماع للآية",
+                                      textDirection: TextDirection.rtl,
+                                    )
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -226,6 +267,13 @@ class _SurahBuilderReciteState extends State<SurahBuilderRecite> {
       theme: ThemeData(primarySwatch: Colors.yellow),
       home: Scaffold(
         appBar: AppBar(
+          actions: [
+            Image.asset(
+              'assets/images/qorra_images/${qary_images[widget.reciterIndex]}.jpg',
+              width: 40,
+              height: 40,
+            )
+          ],
           leading: Tooltip(
             message: 'Mushaf Mode',
             child: TextButton(
@@ -278,7 +326,7 @@ class _SurahBuilderReciteState extends State<SurahBuilderRecite> {
                   height: 150,
                   color: Colors.cyan,
                   child:
-                  FullExample(audioPlayerManager: manager)
+                  FullExample(audioPlayerManager: widget.manager)
 
               ),
             )
@@ -287,6 +335,16 @@ class _SurahBuilderReciteState extends State<SurahBuilderRecite> {
         ),
       ),
     );
+  }
+
+  getCorrectIndex(int surah, int index) {
+    int acc=0;
+    if (surah==0){return index+1;}
+    for(int i=0;i<surah;i++){
+      acc+=sura_ayas[i];
+    }
+    acc+=index+1;
+    return acc;
   }
 }
 

@@ -128,6 +128,7 @@ class _selected_qary_recite2State extends State<selected_qary_recite2> {
                                     surah: e.key,
                                     surahName: arabicName[e.key]['name'],
                                     ayah: 0,
+                                    reciterIndex:widget.qaryIndex
 
                                   )));
 
