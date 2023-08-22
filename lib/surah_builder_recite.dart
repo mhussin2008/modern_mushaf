@@ -2,7 +2,6 @@ import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:modern_mushaf/qurantext/recitation_verse.dart';
-//import 'package:modern_mushaf/selected_qary_recite.dart';
 import 'Image_Selector.dart';
 import 'audio_player_manager.dart';
 import 'qurantext/constant.dart';

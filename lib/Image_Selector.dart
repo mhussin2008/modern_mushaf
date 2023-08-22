@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-//import 'package:modern_mushaf/selected_qary_recite.dart';
 import 'package:modern_mushaf/selected_qary_recite2.dart';
 //import 'package:modern_mushaf/generated/assets.dart';
 

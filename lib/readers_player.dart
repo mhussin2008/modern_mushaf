@@ -1,9 +1,8 @@
-import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'Image_Selector.dart';
 
-// https://alquran.cloud/api
+
 class readers_player extends StatefulWidget {
   const readers_player({super.key});
   @override

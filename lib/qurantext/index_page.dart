@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../main.dart';
 import 'arabic_surah_number.dart';
 import 'my_drawer.dart';
-//import 'main.dart';
+
 import 'surah_builder.dart';
 import 'constant.dart';
 
