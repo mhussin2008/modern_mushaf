@@ -9,14 +9,18 @@ import 'splash_screen.dart';
 
 List arabic = [];
 //List malayalam = [];
-List quran = [];
+//List quran = [];
 List recitations=[];
 
 
 Future readJson() async{
-  final String response = await rootBundle.loadString("assets/text/hafs_smart_v8.json");
-  final data = json.decode(response);
-  arabic = data['quran'];
+  arabic=await rootBundle.loadStructuredData("assets/text/hafs_smart_v8.json", (String s) async {
+    return json.decode(s)['quran'];
+  });
+
+  // final String response = await rootBundle.loadString("assets/text/hafs_smart_v8.json");
+  // final data = json.decode(response);
+  //arabic = data['quran'];
   return ; //quran = [arabic];
 }
 
@@ -43,7 +47,6 @@ class _MyAppState extends State<MyApp> {
       await readJson();
       await getSettings();
     });
-
     super.initState();
   }
 
@@ -80,16 +83,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       appBar: AppBar(
-
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-
         title: Center(child: Text(widget.title)),
       ),
       body: Center(
-
         child: Splash_Screen()
       ),
-
     );
   }
 }

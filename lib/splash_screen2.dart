@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modern_mushaf/readers_player.dart';
-import 'qurantext/index_page.dart';
+
 
 class Splash_Screen2 extends StatelessWidget {
   Splash_Screen2({super.key});

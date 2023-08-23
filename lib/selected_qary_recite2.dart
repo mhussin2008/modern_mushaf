@@ -2,12 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:modern_mushaf/Image_Selector.dart';
 import 'package:modern_mushaf/main.dart';
-
 import 'package:modern_mushaf/surah_builder_recite.dart';
 import '../qurantext/constant.dart';
 import '../qurantext/recitation_verse.dart';
 import 'package:just_audio/just_audio.dart';
-
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'audio_player_manager.dart';
 
@@ -20,7 +18,7 @@ int suraLength = 0;
 
 class selected_qary_recite2 extends StatefulWidget {
   final qaryIndex;
-  selected_qary_recite2(int this.qaryIndex, {super.key});
+  const selected_qary_recite2(int this.qaryIndex, {super.key});
 
   @override
   State<selected_qary_recite2> createState() => _selected_qary_recite2State();

@@ -11,9 +11,9 @@ class SurahBuilder extends StatefulWidget {
   final surah;
   final arabic;
   final surahName;
-  int ayah;
+  final ayah;
 
-  SurahBuilder({
+  const SurahBuilder({
     Key? key,
     this.surah,
     this.arabic,
@@ -121,7 +121,7 @@ class _SurahBuilderState extends State<SurahBuilder> {
                                 onTap: () {
                                   saveBookMark(widget.surah + 1, index);
                                 },
-                                child: Row(
+                                child: const Row(
                                   children: [
                                     Icon(
                                       Icons.bookmark_add,
@@ -139,7 +139,7 @@ class _SurahBuilderState extends State<SurahBuilder> {
                               ),
                               PopupMenuItem(
                                 onTap: () {},
-                                child: Row(
+                                child: const Row(
                                   children: [
                                     Icon(
                                       Icons.share,
@@ -184,7 +184,7 @@ class _SurahBuilderState extends State<SurahBuilder> {
                                   style: TextStyle(
                                     fontSize: musahfFontSize,
                                     fontFamily: arabicFont,
-                                    color: Color.fromARGB(196, 44, 44, 55),
+                                    color: const Color.fromARGB(196, 44, 44, 55),
                                   ),
                                 ),
                               )
@@ -259,9 +259,9 @@ class ReturnBasmalah extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return const Stack(
       children: [
-        const Center(
+        Center(
           child: Text(
             'بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ ',
             style: TextStyle(
