@@ -46,7 +46,7 @@ class _selected_qary_recite2State extends State<selected_qary_recite2> {
       appBar: AppBar(
         title: Row(children: [
           Text(qary_arab_name[widget.qaryIndex]),
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
           Image.asset(

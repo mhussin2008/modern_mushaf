@@ -109,7 +109,7 @@ class _SurahBuilderReciteState extends State<SurahBuilderRecite> {
     int previousVerses = 0;
     if (widget.surah + 1 != 1) {
       for (int i = widget.surah - 1; i >= 0; i--) {
-        previousVerses = previousVerses + noOfVerses[i];
+        previousVerses = previousVerses + sura_ayas[i];
       }
     }
     if (!view) {
@@ -257,7 +257,8 @@ class _SurahBuilderReciteState extends State<SurahBuilderRecite> {
 
   @override
   Widget build(BuildContext context) {
-    int LengthOfSurah = noOfVerses[widget.surah];
+
+    int LengthOfSurah = sura_ayas[widget.surah];
     double s_width = MediaQuery.of(context).size.width;
     double s_height = MediaQuery.of(context).size.height;
 
